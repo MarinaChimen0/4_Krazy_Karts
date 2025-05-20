@@ -53,6 +53,12 @@ private:
 	
 	FVector Velocity;
 
+	UPROPERTY(Replicated)
+	FVector ReplicatedLocation;
+
+	UPROPERTY(Replicated)
+	FRotator ReplicatedRotation;
+
 	FVector GetAirResistance();
 	FVector GetRollingResistance();
 	void ApplyRotation(float DeltaTime);
