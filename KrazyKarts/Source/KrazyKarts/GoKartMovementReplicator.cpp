@@ -87,6 +87,21 @@ void UGoKartMovementReplicator::ClientTick(float DeltaTime)
 
 void UGoKartMovementReplicator::OnRep_ServerState()
 {
+	switch (GetOwnerRole())
+	{
+		case ROLE_AutonomousProxy:
+			AutonomousProxy_OnRep_ServerState();
+			break;
+		case ROLE_SimulatedProxy:
+			SimulatedProxy_OnRep_ServerState();
+			break;
+		default:
+			break;
+	}
+}
+
+void UGoKartMovementReplicator::AutonomousProxy_OnRep_ServerState()
+{
 	if (!MovementComponent)
 	{
 		return;
