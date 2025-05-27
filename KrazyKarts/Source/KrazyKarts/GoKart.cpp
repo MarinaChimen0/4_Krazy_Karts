@@ -30,6 +30,8 @@ void AGoKart::BeginPlay()
 	{
 		NetUpdateFrequency = 1;
 	}
+
+	SetReplicateMovement(false);
 }
 
 FString AGoKart::GetEnumText(ENetRole NetRole)
