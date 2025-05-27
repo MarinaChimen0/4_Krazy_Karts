@@ -3,41 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GoKartMovementComponent.h"
+#include "GoKartMovementReplicator.h"
 #include "GameFramework/Pawn.h"
 #include "GoKart.generated.h"
-
-USTRUCT()
-struct FGoKartMove
-{
-	GENERATED_USTRUCT_BODY()
-
-	UPROPERTY()
-	float Throttle;
-	
-	UPROPERTY()
-	float SteeringThrow;
-	
-	UPROPERTY()
-	float DeltaTime;
-
-	UPROPERTY()
-	float StartTime;
-};
-
-USTRUCT()
-struct FGoKartState
-{
-	GENERATED_USTRUCT_BODY()
-
-	UPROPERTY()
-	FTransform Transform;
-
-	UPROPERTY()
-	FVector Velocity;
-	
-	UPROPERTY()
-	FGoKartMove LastMove;
-};
 
 UCLASS()
 class KRAZYKARTS_API AGoKart : public APawn
@@ -60,55 +29,14 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	// Mass of the car (kg)
-	UPROPERTY(EditAnywhere)
-	float Mass = 1000;
-
-	// Force applied to the car when the throttle is fully down (N)
-	UPROPERTY(EditAnywhere)
-	float MaxDrivingForce = 10000;
-
-	// Minimum radius of the car turning circle ar full lock (m)
-	UPROPERTY(EditAnywhere)
-	float MinTurningRadius = 10;
-
-	// Higher means more drag (Kg/m)
-	UPROPERTY(EditAnywhere)
-	float DragCoefficient = 16;
-
-	// Higher means more rolling resistance (Kg/m)
-	UPROPERTY(EditAnywhere)
-	float RollingResistanceCoefficient = 0.015;
-
-	UPROPERTY(ReplicatedUsing = OnRep_ServerState)
-	FGoKartState ServerState;
-
-	FVector Velocity;
 	
-	float Throttle;
-	
-	float SteeringThrow;
-
-	TArray<FGoKartMove> UnackowledgedMoves;
-
-	UFUNCTION()
-	void OnRep_ServerState();
-
-	void SimulateMove(const FGoKartMove& Move);
-	
-	FGoKartMove CreateMove(float DeltaTime);
-	void ClearAckowledgedMoves(FGoKartMove LastMove);
-
-	FVector GetAirResistance();
-	FVector GetRollingResistance();
-	void ApplyRotation(float DeltaTime, float MoveSteeringThrow);
-	void UpdateLocationFromVelocity(float DeltaTime);
-
 	void MoveForward(float Value);
 	void MoveRight(float Value);
-	
-	UFUNCTION(Server, Reliable, WithValidation)
-	void Server_SendMove(FGoKartMove Move);
 
 	FString GetEnumText(ENetRole Role);
+
+	UPROPERTY(VisibleAnywhere)
+	UGoKartMovementComponent* MovementComponent;
+	UPROPERTY(VisibleAnywhere)
+	UGoKartMovementReplicator* MovementReplicator;
 };
