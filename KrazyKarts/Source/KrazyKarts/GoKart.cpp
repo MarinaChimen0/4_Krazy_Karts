@@ -29,9 +29,8 @@ void AGoKart::BeginPlay()
 	if (HasAuthority())
 	{
 		NetUpdateFrequency = 1;
+		SetReplicateMovement(false);
 	}
-
-	SetReplicateMovement(false);
 }
 
 FString AGoKart::GetEnumText(ENetRole NetRole)
