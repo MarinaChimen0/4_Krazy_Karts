@@ -35,8 +35,8 @@ private:
 
 	FString GetEnumText(ENetRole Role);
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UGoKartMovementComponent* MovementComponent;
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	UGoKartMovementReplicator* MovementReplicator;
 };
