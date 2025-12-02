@@ -3,8 +3,6 @@ State Syncronization and Interpolation section from the course Unreal 4 C++ Mult
 
 ## Features
 
-**4_Krazy_Karts** provides a strong foundation for multiplayer racing games by implementing essential systems for networking and game state management.
-
 ### Multiplayer Kart Setup
 - **Vehicle Mechanics:** Simulates realistic kart movement physics including acceleration, braking, drifting, and steering.
 - **Multiple Players:** Supports multiple clients connected to a server for real-time multiplayer sessions.
