@@ -30,7 +30,6 @@ State Syncronization and Interpolation section from the course Unreal 4 C++ Mult
 - **State Verification:** Server validates client-reported positions to detect impossible or abnormal movements.
 
 ### Modular Architecture
-- **Separation of Concerns:** Networking logic is modular and isolated from gameplay code, making it easy to expand.
-- **Educational Value:** Each module (input, replication, prediction, interpolation) is clear and isolated.
-- **Lightweight:** Focuses on essential multiplayer functionality without unnecessary features or graphics.
+- **Separation of Gameplay and Networking Logic:** Gameplay mechanics and network logic are kept separate to prevent coupling and ensure maintainability. 
+- **Modular Networking Systems:** Key networking components such as replication, prediction, interpolation, and lag compensation, are implemented as isolated modules. 
 
